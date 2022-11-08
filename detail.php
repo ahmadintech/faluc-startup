@@ -1,3 +1,16 @@
+<?php include('admin/connection.php'); 
+
+if(isset($page)){
+//$page = $_GET['page'];
+$query =  "SELECT * FROM posts WHERE id = $page";
+
+$getPost = $con->prepare($query);
+$getPost->execute();
+$result = $getPost->get_result();
+}else{
+    header('Location: /bo/news');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,14 +34,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
 <!-- Libraries Stylesheet -->
-<link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-<link href="lib/animate/animate.min.css" rel="stylesheet">
+<link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="../lib/animate/animate.min.css" rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
 <style>
 .full-justify{
     text-align: justify;
@@ -65,10 +78,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="blog.html" class="nav-item nav-link active">Blog</a>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="/home" class="nav-item nav-link">Home</a>
+            <a href="/about-us" class="nav-item nav-link">About</a>
+            <a href="/blog" class="nav-item nav-link active">Blog</a>
+            <a href="/contact-us" class="nav-item nav-link">Contact</a>
         </div>
     </div>
 </nav>
@@ -83,36 +96,22 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-8">
+                <?php
+                            while($row = $result->fetch_assoc()){ ?>
                     <!-- Blog Detail Start -->
                     <div class="mb-5">
-                        <img class="img-fluid w-100 rounded mb-5" src="img/blog-1.jpg" alt="">
-                        <h1 class="mb-4">Diam dolor est labore duo ipsum clita sed et lorem tempor duo</h1>
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut
-                            magna lorem. Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet
-                            amet magna accusam consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at
-                            sanctus et. Ipsum sit gubergren dolores et, consetetur justo invidunt at et
-                            aliquyam ut et vero clita. Diam sea sea no sed dolores diam nonumy, gubergren
-                            sit stet no diam kasd vero.</p>
-                        <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores
-                            vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit
-                            nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore
-                            ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et,
-                            clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat
-                            justo dolore sit invidunt.</p>
-                        <p>Diam dolor est labore duo invidunt ipsum clita et, sed et lorem voluptua tempor
-                            invidunt at est sanctus sanctus. Clita dolores sit kasd diam takimata justo diam
-                            lorem sed. Magna amet sed rebum eos. Clita no magna no dolor erat diam tempor
-                            rebum consetetur, sanctus labore sed nonumy diam lorem amet eirmod. No at tempor
-                            sea diam kasd, takimata ea nonumy elitr sadipscing gubergren erat. Gubergren at
-                            lorem invidunt sadipscing rebum sit amet ut ut, voluptua diam dolores at
-                            sadipscing stet. Clita dolor amet dolor ipsum vero ea ea eos.</p>
-                        <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores
-                            vero stet consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit
-                            nonumy kasd diam dolores, sanctus lorem kasd duo dolor dolor vero sit et. Labore
-                            ipsum duo sanctus amet eos et. Consetetur no sed et aliquyam ipsum justo et,
-                            clita lorem sit vero amet amet est dolor elitr, stet et no diam sit. Dolor erat
-                            justo dolore sit invidunt.</p>
+                        <h1 class="mb-4"><?php echo $row['post_title'] ?></h1>
+                        <img class="img-fluid w-100 rounded mb-5" src="../img/post/<?php echo $row['imagePath']; ?>" alt="image">
+                        <div class="g2 mb-2">
+                            <span class="text-danger"><i class="fa fa-calendar-alt me-2"></i><?php echo date('d F, Y', strtotime( $row['createdAt'])) ?></span> | <small>By Admin</small>
+                        </div>
+
+                        <p><?php echo $row['post_content'] ?></p>
                     </div>
+                    <?php
+                    };
+                    ?>
+
                     <!-- Blog Detail End -->
     
                    
@@ -151,21 +150,9 @@
                         <div class="section-title section-title-sm position-relative pb-3 mb-4">
                             <h3 class="mb-0">Recent Post</h3>
                         </div>
-                        <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                            </a>
-                        </div>
-                        <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="img/blog-2.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                            </a>
-                        </div>
-                        <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="img/blog-3.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                            </a>
-                        </div>
+                        <?php
+                        include_once("recent-post.html.php");
+                        ?>
                     </div>
                     <!-- Recent Post End -->
     
@@ -190,13 +177,13 @@
     <div class="container py-5 mb-5">
         <div class="bg-white">
             <div class="owl-carousel vendor-carousel">
-                <img src="img/partners/Rectangle 1.png" alt="">
-                <img src="img/partners/Rectangle 2.png" alt="">
-                <img src="img/partners/Rectangle 3.png" alt="">
-                <img src="img/partners/Rectangle 4.png" alt="">
-                <img src="img/partners/Rectangle 5.png" alt="">
-                <img src="img/partners/Rectangle 6.png" alt="">
-                <img src="img/partners/Rectangle 3.png" alt="">
+                <img src="../img/partners/Rectangle 1.png" alt="">
+                <img src="../img/partners/Rectangle 2.png" alt="">
+                <img src="../img/partners/Rectangle 3.png" alt="">
+                <img src="../img/partners/Rectangle 4.png" alt="">
+                <img src="../img/partners/Rectangle 5.png" alt="">
+                <img src="../img/partners/Rectangle 6.png" alt="">
+                <img src="../img/partners/Rectangle 3.png" alt="">
           
             </div>
         </div>
@@ -228,14 +215,14 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/wow/wow.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/counterup/counterup.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../lib/wow/wow.min.js"></script>
+<script src="../lib/easing/easing.min.js"></script>
+<script src="../lib/waypoints/waypoints.min.js"></script>
+<script src="../lib/counterup/counterup.min.js"></script>
+<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 
 </html>

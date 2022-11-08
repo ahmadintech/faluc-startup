@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+  }
+  html,body{
+    display: grid;
+    height: 100vh;
+    place-items:center;
+    background: #fff;
+  }
+  .main_div{
+    width: 365px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    border: 1px solid #23ab69;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+ 
+  .main_div img{
+    width: 30%;
+    height: 30%; 
+    margin-top: -80px;
+    margin-left: 35%;
+} 
+
+  form {
+    margin-top: 25px;
+  }
+  form .message{
+    background-color: #dc3545;
+    padding: 5%;
+    color: #fff;
+    font-weight: 700; 
+  }
+  form .message:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+  }
+  
+
+  form .input_box{
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+  }
+  .input_box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 45px;
+    font-size: 17px;
+    transition: all 0.3s ease;
+  }
+  .input_box input:focus{
+    border-color: #23ab69;
+  }
+  .input_box .icon{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+  }
+  form .option_div{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .option_div .check_box{
+    display: flex;
+    align-items: center;
+  }
+  .option_div span{
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+ 
+  .button input{
+    padding-left: 0;
+    background: #23ab69;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  .button input:hover{
+    background: #2a8f5e;
+    border: 1px solid black;
+  }
+  form .sign_up{
+    text-align: center;
+    margin-top: 25px;
+  }
+  .sign_up a{
+    color: #3acf87;
+  }
+  form a{
+    text-decoration: none;
+  }
+  form a:hover{
+    text-decoration: underline;
+  }
+  
